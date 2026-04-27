@@ -1,0 +1,15 @@
+
+<div id="footer"></div>
+
+<script>
+// Load Header
+fetch('/components/final-header.html')
+    .then(response => response.text())
+    .then(data => document.getElementById('header-1').innerHTML = data);
+
+// Load Footer
+fetch('/components/final-footer.html')
+    .then(response => response.text())
+    .then(data => document.getElementById('footer').innerHTML = data);
+</script>
+ 
