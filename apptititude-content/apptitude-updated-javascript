@@ -1,0 +1,30 @@
+document.querySelectorAll(".options").forEach(optionGroup => {
+    optionGroup.addEventListener("click", function(event) {
+        if (event.target.classList.contains("option")) {
+            let selectedOption = event.target;
+            let correctAnswer = optionGroup.getAttribute("data-correct").trim();
+            let selectedText = selectedOption.innerText.trim().replace(/₹|,/g, ""); // Remove ₹ symbol and commas
+
+            // Remove previous styles from all options in this question
+            optionGroup.querySelectorAll(".option").forEach(button => {
+                button.classList.remove("correct", "wrong");
+            });
+
+            // Show explanation related to the selected question
+            let explanation = optionGroup.nextElementSibling;
+            explanation.classList.remove("hidden");
+
+            // Check if the selected option is correct
+            if (selectedText === correctAnswer) {
+                selectedOption.classList.add("correct");
+                selectedOption.innerText += " 🎉"; // Add celebration emoji
+            } else {
+                selectedOption.classList.add("wrong");
+            }
+        }
+    });
+});
+
+function goBack() {
+    window.history.back();
+}
