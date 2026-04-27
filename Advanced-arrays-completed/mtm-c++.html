@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimize the Maximum Difference Between Heights - C++ Program</title>
+    <style>
+        /* Main Content Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+    
+        main {
+            flex: 1;
+            padding: 30px;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+    
+        .content-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+    
+        .content-header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+    
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    
+        .card h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+    
+        .card p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+    
+        .example {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+    
+        .example h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+    
+        .methods {
+            margin-top: 40px;
+        }
+    
+        .methods h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+    
+        .methods ul {
+            list-style-position: inside;
+            margin-left: 20px;
+        }
+    
+        .methods li {
+            margin-bottom: 30px;
+        }
+    
+        .code {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 15px 0;
+            line-height: 1.5;
+            tab-size: 4;
+        }
+    
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                padding: 15px;
+            }
+            
+            .content-header h1 {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-1"></div>
+
+    <main>
+        <header class="content-header">
+        <h1>Minimize the Maximum Difference Between Heights</h1>
+    </header>
+    <section class="container">
+        <div class="card">
+            <h2>Understanding the Problem</h2>
+            <p>The goal is to minimize the maximum difference between the heights of towers after modifying them within a given range.</p>
+        </div>
+        
+        <div class="card">
+            <h2>Method 1: Sorting and Greedy Approach</h2>
+            <p>This method sorts the array and then modifies heights by either increasing or decreasing within the given range.</p>
+            <pre class="code">
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+int minimizeDifference(int arr[], int n, int k) {
+    sort(arr, arr + n);
+    int minDiff = arr[n - 1] - arr[0];
+    for (int i = 1; i < n; i++) {
+        int minHeight = min(arr[0] + k, arr[i] - k);
+        int maxHeight = max(arr[n - 1] - k, arr[i - 1] + k);
+        minDiff = min(minDiff, maxHeight - minHeight);
+    }
+    return minDiff;
+}
+
+int main() {
+    int arr[] = {1, 15, 10};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int k = 6;
+    cout << "Minimum difference: " << minimizeDifference(arr, n, k);
+    return 0;
+}
+            </pre>
+            <h3>Output:</h3>
+            <pre class="output">Minimum difference: 5</pre>
+        </div>
+        
+        <div class="card">
+            <h2>Method 2: Brute Force</h2>
+            <p>This method tries all possibilities of adding or subtracting k from each element.</p>
+            <pre class="code">
+#include &lt;iostream&gt;
+#include &lt;climits&gt;
+using namespace std;
+
+int findMinDifference(int arr[], int n, int k) {
+    int minDiff = INT_MAX;
+    for (int i = 0; i < (1 << n); i++) {
+        int modifiedArr[n];
+        for (int j = 0; j < n; j++) {
+            modifiedArr[j] = (i & (1 << j)) ? arr[j] + k : arr[j] - k;
+        }
+        int minHeight = *min_element(modifiedArr, modifiedArr + n);
+        int maxHeight = *max_element(modifiedArr, modifiedArr + n);
+        minDiff = min(minDiff, maxHeight - minHeight);
+    }
+    return minDiff;
+}
+
+int main() {
+    int arr[] = {1, 15, 10};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int k = 6;
+    cout << "Minimum difference: " << findMinDifference(arr, n, k);
+    return 0;
+}
+            </pre>
+            <h3>Output:</h3>
+            <pre class="output">Minimum difference: 5</pre>
+        </div>
+        
+        <div class="card">
+            <h2>Method 3: Optimized Sorting Approach</h2>
+            <p>An optimized approach that modifies heights while iterating through the sorted array.</p>
+            <pre class="code">
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+int getMinimizedDifference(int arr[], int n, int k) {
+    sort(arr, arr + n);
+    int minDiff = arr[n - 1] - arr[0];
+    int smallest = arr[0] + k, largest = arr[n - 1] - k;
+    if (smallest > largest) swap(smallest, largest);
+    for (int i = 1; i < n - 1; i++) {
+        int decrease = arr[i] - k;
+        int increase = arr[i] + k;
+        if (decrease >= smallest || increase <= largest) continue;
+        if (largest - decrease <= increase - smallest)
+            smallest = decrease;
+        else
+            largest = increase;
+    }
+    return min(minDiff, largest - smallest);
+}
+
+int main() {
+    int arr[] = {1, 15, 10};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int k = 6;
+    cout << "Minimum difference: " << getMinimizedDifference(arr, n, k);
+    return 0;
+}
+            </pre>
+            <h3>Output:</h3>
+            <pre class="output">Minimum difference: 5</pre>
+        </div>
+    </section>
+</main>
+<div  id="connection-1"></div>
+
+<div id="footer"></div>
+
+<script>
+// Load Header
+fetch('/components/final-header.html')
+.then(response => response.text())
+.then(data => document.getElementById('header-1').innerHTML = data);
+
+// Load Footer
+fetch('/components/final-footer.html')
+.then(response => response.text())
+.then(data => document.getElementById('footer').innerHTML = data);
+
+// load the data of connecting obhects 
+fetch('/additional-component-top-100/content-ad-arrays.html')
+.then(response => response.text())
+.then(data => document.getElementById('connection-1').innerHTML = data);
+
+</script>
+</body>
+</html>

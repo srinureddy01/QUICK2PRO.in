@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Move All Negative Elements to One Side of the Array - Java Program</title>
+    <style>
+        /* Main Content Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+    
+        main {
+            flex: 1;
+            padding: 30px;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+    
+        .content-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+    
+        .content-header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+    
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    
+        .card h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+    
+        .card p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+    
+        .example {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+    
+        .example h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+    
+        .methods {
+            margin-top: 40px;
+        }
+    
+        .methods h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+    
+        .methods ul {
+            list-style-position: inside;
+            margin-left: 20px;
+        }
+    
+        .methods li {
+            margin-bottom: 30px;
+        }
+    
+        .code {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 15px 0;
+            line-height: 1.5;
+            tab-size: 4;
+        }
+    
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                padding: 15px;
+            }
+            
+            .content-header h1 {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-1"></div>
+
+    <main>
+        <header class="content-header">
+        <h1>Move All the Negative Elements to One Side of the Array</h1>
+    </header>
+    <section class="container">
+        <div class="card">
+            <h2>Understanding the Problem</h2>
+            <p>The goal is to move all negative elements to one side of the array using different methods.</p>
+        </div>
+        
+        <div class="card">
+            <h2>Method 1: Using Two Pointers</h2>
+            <p>This method uses two pointers to swap negative and positive elements efficiently.</p>
+            <pre class="code">
+public class MoveNegatives {
+    public static void rearrange(int[] arr) {
+        int left = 0, right = arr.length - 1;
+        while (left <= right) {
+            if (arr[left] < 0) left++;
+            else if (arr[right] >= 0) right--;
+            else {
+                int temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+                left++;
+                right--;
+            }
+        }
+    }
+    
+    public static void printArray(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+    
+    public static void main(String[] args) {
+        int[] arr = {-12, 11, -13, -5, 6, -7, 5, -3, -6};
+        rearrange(arr);
+        printArray(arr);
+    }
+}
+            </pre>
+            <h3>Output:</h3>
+            <pre class="output">-12 -13 -5 -7 -3 -6 6 5 11</pre>
+        </div>
+        
+        <div class="card">
+            <h2>Method 2: Using Partition Process of QuickSort</h2>
+            <p>This method places all negative elements before positive elements using partitioning.</p>
+            <pre class="code">
+public class MoveNegativesPartition {
+    public static void partition(int[] arr) {
+        int j = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < 0) {
+                if (i != j) {
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+                j++;
+            }
+        }
+    }
+    
+    public static void printArray(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+    
+    public static void main(String[] args) {
+        int[] arr = {-12, 11, -13, -5, 6, -7, 5, -3, -6};
+        partition(arr);
+        printArray(arr);
+    }
+}
+            </pre>
+            <h3>Output:</h3>
+            <pre class="output">-12 -13 -5 -7 -3 -6 6 5 11</pre>
+        </div>
+        
+        <div class="card">
+            <h2>Method 3: Using Extra Space</h2>
+            <p>This method creates a new array and stores negative and positive elements separately.</p>
+            <pre class="code">
+public class MoveNegativesExtraSpace {
+    public static void rearrangeWithExtraSpace(int[] arr) {
+        int[] temp = new int[arr.length];
+        int index = 0;
+        
+        for (int num : arr) {
+            if (num < 0) temp[index++] = num;
+        }
+        for (int num : arr) {
+            if (num >= 0) temp[index++] = num;
+        }
+        System.arraycopy(temp, 0, arr, 0, arr.length);
+    }
+    
+    public static void printArray(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+    
+    public static void main(String[] args) {
+        int[] arr = {-12, 11, -13, -5, 6, -7, 5, -3, -6};
+        rearrangeWithExtraSpace(arr);
+        printArray(arr);
+    }
+}
+            </pre>
+            <h3>Output:</h3>
+            <pre class="output">-12 -13 -5 -7 -3 -6 6 5 11</pre>
+        </div>
+    </section>
+</main>
+<div  id="connection-1"></div>
+
+<div id="footer"></div>
+
+<script>
+// Load Header
+fetch('/components/final-header.html')
+.then(response => response.text())
+.then(data => document.getElementById('header-1').innerHTML = data);
+
+// Load Footer
+fetch('/components/final-footer.html')
+.then(response => response.text())
+.then(data => document.getElementById('footer').innerHTML = data);
+
+// load the data of connecting obhects 
+fetch('/additional-component-top-100/content-ad-arrays.html')
+.then(response => response.text())
+.then(data => document.getElementById('connection-1').innerHTML = data);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Median of 2 Sorted Arrays of Equal Size - C Program</title>
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+    <header>
+        <h1>Median of 2 Sorted Arrays of Equal Size</h1>
+    </header>
+    <section class="container">
+        <div class="card">
+            <h2>Understanding the Problem</h2>
+            <p>The goal is to find the median of two sorted arrays of equal size.</p>
+        </div>
+        
+        <div class="card">
+            <h2>Method 1: Simple Merge</h2>
+            <p>This method merges the two arrays and finds the median.</p>
+            <pre class="code">
+#include &lt;iostream&gt;
+using namespace std;
+
+double findMedianSortedArrays(int arr1[], int arr2[], int n) {
+    int merged[2 * n];
+    int i = 0, j = 0, k = 0;
+
+    while (i < n && j < n) {
+        if (arr1[i] < arr2[j]) {
+            merged[k++] = arr1[i++];
+        } else {
+            merged[k++] = arr2[j++];
+        }
+    }
+    while (i < n) merged[k++] = arr1[i++];
+    while (j < n) merged[k++] = arr2[j++];
+
+    return (merged[n - 1] + merged[n]) / 2.0;
+}
+
+int main() {
+    int arr1[] = {1, 3};
+    int arr2[] = {2, 4};
+    int n = sizeof(arr1) / sizeof(arr1[0]);
+    cout << "Median: " << findMedianSortedArrays(arr1, arr2, n) << endl;
+    return 0;
+}
+            </pre>
+            <h3>Output:</h3>
+            <pre class="output">Median: 2.5</pre>
+        </div>
+        
+        <div class="card">
+            <h2>Method 2: Binary Search</h2>
+            <p>This method uses binary search to find the median efficiently.</p>
+            <pre class="code">
+#include &lt;iostream&gt;
+using namespace std;
+
+double findMedianSortedArrays(int arr1[], int arr2[], int n) {
+    int low = 0, high = n;
+    while (low <= high) {
+        int partition1 = (low + high) / 2;
+        int partition2 = n - partition1;
+
+        int maxLeft1 = (partition1 == 0) ? INT_MIN : arr1[partition1 - 1];
+        int minRight1 = (partition1 == n) ? INT_MAX : arr1[partition1];
+
+        int maxLeft2 = (partition2 == 0) ? INT_MIN : arr2[partition2 - 1];
+        int minRight2 = (partition2 == n) ? INT_MAX : arr2[partition2];
+
+        if (maxLeft1 <= minRight2 && maxLeft2 <= minRight1) {
+            return (max(maxLeft1, maxLeft2) + min(minRight1, minRight2)) / 2.0;
+        } else if (maxLeft1 > minRight2) {
+            high = partition1 - 1;
+        } else {
+            low = partition1 + 1;
+        }
+    }
+    throw invalid_argument("Input arrays are not sorted.");
+}
+
+int main() {
+    int arr1[] = {1, 3};
+    int arr2[] = {2, 4};
+    int n = sizeof(arr1) / sizeof(arr1[0]);
+    cout << "Median: " << findMedianSortedArrays(arr1, arr2, n) << endl;
+    return 0;
+}
+            </pre>
+            <h3>Output:</h3>
+            <pre class="output">Median: 2.5</pre>
+        </div>
+        
+        <div class="card">
+            <h2>Method 3: Using a Combined Array</h2>
+            <p>This method combines the arrays and finds the median directly.</p>
+            <pre class="code">
+#include &lt;iostream&gt;
+using namespace std;
+
+double findMedianSortedArrays(int arr1[], int arr2[], int n) {
+    int combined[2 * n];
+    for (int i = 0; i < n; i++) {
+        combined[i] = arr1[i];
+        combined[i + n] = arr2[i];
+    }
+    sort(combined, combined + 2 * n);
+    return (combined[n - 1] + combined[n]) / 2.0;
+}
+
+int main() {
+    int arr1[] = {1, 3};
+    int arr2[] = {2, 4};
+    int n = sizeof(arr1) / sizeof(arr1[0]);
+    cout << "Median: " << findMedianSortedArrays(arr1, arr2, n) << endl;
+    return 0;
+}
+            </pre>
+            <h3>Output:</h3>
+           

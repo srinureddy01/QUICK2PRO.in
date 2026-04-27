@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Minimum Operations to Make an Array Palindrome - C++ Program</title>
+    <style>
+        /* Main Content Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+    
+        main {
+            flex: 1;
+            padding: 30px;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+    
+        .content-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+    
+        .content-header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+    
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    
+        .card h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+    
+        .card p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+    
+        .example {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+    
+        .example h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+    
+        .methods {
+            margin-top: 40px;
+        }
+    
+        .methods h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+    
+        .methods ul {
+            list-style-position: inside;
+            margin-left: 20px;
+        }
+    
+        .methods li {
+            margin-bottom: 30px;
+        }
+    
+        .code {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 15px 0;
+            line-height: 1.5;
+            tab-size: 4;
+        }
+    
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                padding: 15px;
+            }
+            
+            .content-header h1 {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-1"></div>
+
+    <main>
+        <header class="content-header">
+        <h1>Find Minimum Operations to Make an Array Palindrome</h1>
+    </header>
+    <section class="container">
+        <div class="card">
+            <h2>Understanding the Problem</h2>
+            <p>The goal is to determine the minimum number of merge operations required to make an array a palindrome.</p>
+        </div>
+        
+        <div class="card">
+            <h2>Method 1: Two-Pointer Approach</h2>
+            <p>This method uses a two-pointer technique to check and merge elements as needed.</p>
+            <pre class="code">
+#include &lt;iostream&gt;
+using namespace std;
+
+int minOperations(int arr[], int n) {
+    int i = 0, j = n - 1, operations = 0;
+    while (i < j) {
+        if (arr[i] == arr[j]) {
+            i++; j--;
+        } else if (arr[i] < arr[j]) {
+            arr[i + 1] += arr[i];
+            i++;
+            operations++;
+        } else {
+            arr[j - 1] += arr[j];
+            j--;
+            operations++;
+        }
+    }
+    return operations;
+}
+
+int main() {
+    int arr[] = {1, 4, 5, 1};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    cout << "Minimum operations: " << minOperations(arr, n) << endl;
+    return 0;
+}
+            </pre>
+            <h3>Output:</h3>
+            <pre class="output">Minimum operations: 1</pre>
+        </div>
+        
+        <div class="card">
+            <h2>Method 2: Recursion</h2>
+            <p>This method uses a recursive approach to count the operations.</p>
+            <pre class="code">
+#include &lt;iostream&gt;
+using namespace std;
+
+int minOpsRecursive(int arr[], int i, int j) {
+    if (i >= j) return 0;
+    if (arr[i] == arr[j]) return minOpsRecursive(arr, i + 1, j - 1);
+    if (arr[i] < arr[j]) {
+        arr[i + 1] += arr[i];
+        return 1 + minOpsRecursive(arr, i + 1, j);
+    } else {
+        arr[j - 1] += arr[j];
+        return 1 + minOpsRecursive(arr, i, j - 1);
+    }
+}
+
+int main() {
+    int arr[] = {1, 4, 5, 1};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    cout << "Minimum operations: " << minOpsRecursive(arr, 0, n - 1) << endl;
+    return 0;
+}
+            </pre>
+            <h3>Output:</h3>
+            <pre class="output">Minimum operations: 1</pre>
+        </div>
+        
+        <div class="card">
+            <h2>Method 3: Dynamic Programming</h2>
+            <p>This method utilizes a DP table to compute the minimum operations.</p>
+            <pre class="code">
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+using namespace std;
+
+int minOpsDP(int arr[], int n) {
+    int dp[n][n];
+    memset(dp, 0, sizeof(dp));
+    for (int gap = 1; gap < n; ++gap) {
+        for (int i = 0, j = gap; j < n; ++i, ++j) {
+            dp[i][j] = (arr[i] == arr[j]) ? dp[i + 1][j - 1] :
+                        (1 + ((arr[i] < arr[j]) ? dp[i + 1][j] : dp[i][j - 1]));
+        }
+    }
+    return dp[0][n - 1];
+}
+
+int main() {
+    int arr[] = {1, 4, 5, 1};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    cout << "Minimum operations: " << minOpsDP(arr, n) << endl;
+    return 0;
+}
+            </pre>
+            <h3>Output:</h3>
+            <pre class="output">Minimum operations: 1</pre>
+        </div>
+    </section></main>
+    <div  id="connection-1"></div>
+    
+    <div id="footer"></div>
+    
+    <script>
+    // Load Header
+    fetch('/components/final-header.html')
+    .then(response => response.text())
+    .then(data => document.getElementById('header-1').innerHTML = data);
+    
+    // Load Footer
+    fetch('/components/final-footer.html')
+    .then(response => response.text())
+    .then(data => document.getElementById('footer').innerHTML = data);
+    
+    // load the data of connecting obhects 
+    fetch('/additional-component-top-100/content-ad-arrays.html')
+    .then(response => response.text())
+    .then(data => document.getElementById('connection-1').innerHTML = data);
+    
+    </script>
+</body>
+</html>

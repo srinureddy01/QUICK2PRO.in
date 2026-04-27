@@ -1,0 +1,91 @@
+  /* General Page Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #eef1f7;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+/* Header Styling */
+header {
+    text-align: center;
+    background: linear-gradient(45deg, #1e3c72, #2a5298);
+    color: white;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Main Container */
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Styling */
+.card {
+    background: #ffffff;
+    padding: 20px;
+    margin: 15px 0;
+    border-left: 5px solid #007BFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+/* Code Block Styling */
+.code, .output {
+    background-color: #1e1e1e;
+    color: #dcdcdc;
+    font-family: 'Fira Code', monospace;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Syntax Highlighting */
+.code .keyword { color: #569cd6; font-weight: bold; }
+.code .function { color: #dcdcaa; }
+.code .variable { color: #9cdcfe; }
+.code .number { color: #b5cea8; }
+.code .comment { color: #6a9955; font-style: italic; }
+
+/* Output Styling */
+.output {
+    background-color: #272822;
+    color: #f8f8f2;
+    border-left: 4px solid #f39c12;
+}
+
+/* Method List Styling */
+.methods ul {
+    list-style: none;
+    padding: 0;
+}
+
+.methods ul li {
+    background: #007BFF;
+    color: white;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.methods ul li:hover {
+    background: #0056b3;
+    cursor: pointer;
+}

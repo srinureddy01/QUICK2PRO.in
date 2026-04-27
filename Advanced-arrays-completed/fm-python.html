@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Minimum Operations to Make an Array Palindrome - Python Program</title>
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+    <header>
+        <h1>Find Minimum Operations to Make an Array Palindrome</h1>
+    </header>
+    <section class="container">
+        <div class="card">
+            <h2>Understanding the Problem</h2>
+            <p>The goal is to determine the minimum number of merge operations required to make an array a palindrome.</p>
+        </div>
+        
+        <div class="card">
+            <h2>Method 1: Two-Pointer Approach</h2>
+            <p>This method uses a two-pointer technique to check and merge elements as needed.</p>
+            <pre class="code">
+def min_operations(arr):
+    i, j = 0, len(arr) - 1
+    operations = 0
+    while i < j:
+        if arr[i] == arr[j]:
+            i += 1
+            j -= 1
+        elif arr[i] < arr[j]:
+            arr[i + 1] += arr[i]
+            i += 1
+            operations += 1
+        else:
+            arr[j - 1] += arr[j]
+            j -= 1
+            operations += 1
+    return operations
+
+arr = [1, 4, 5, 1]
+print("Minimum operations:", min_operations(arr))
+            </pre>
+            <h3>Output:</h3>
+            <pre class="output">Minimum operations: 1</pre>
+        </div>
+        
+        <div class="card">
+            <h2>Method 2: Recursion</h2>
+            <p>This method uses a recursive approach to count the operations.</p>
+            <pre class="code">
+def min_ops_recursive(arr, i, j):
+    if i >= j:
+        return 0
+    if arr[i] == arr[j]:
+        return min_ops_recursive(arr, i + 1, j - 1)
+    if arr[i] < arr[j]:
+        arr[i + 1] += arr[i]
+        return 1 + min_ops_recursive(arr, i + 1, j)
+    else:
+        arr[j - 1] += arr[j]
+        return 1 + min_ops_recursive(arr, i, j - 1)
+
+arr = [1, 4, 5, 1]
+print("Minimum operations:", min_ops_recursive(arr, 0, len(arr) - 1))
+            </pre>
+            <h3>Output:</h3>
+            <pre class="output">Minimum operations: 1</pre>
+        </div>
+        
+        <div class="card">
+            <h2>Method 3: Dynamic Programming</h2>
+            <p>This method utilizes a DP table to compute the minimum operations.</p>
+            <pre class="code">
+def min_ops_dp(arr):
+    n = len(arr)
+    dp = [[0] * n for _ in range(n)]
+    
+    for gap in range(1, n):
+        for i in range(n - gap):
+            j = i + gap
+            if arr[i] == arr[j]:
+                dp[i][j] = dp[i + 1][j - 1]
+            else:
+                dp[i][j] = 1 + (dp[i + 1][j] if arr[i] < arr[j] else dp[i][j - 1])
+    
+    return dp[0][n - 1]
+
+arr = [1, 4, 5, 1]
+print("Minimum operations:", min_ops_dp(arr))
+            </pre>
+            <h3>Output:</h3>
+            <pre class="output">Minimum operations: 1</pre>
+        </div>
+    </section>
+</body>
+</html>
