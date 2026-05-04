@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number System Quiz</title>
+    <link rel="stylesheet" href="Apptitude-Common-styles.css">
+    <style>
+        /* Additional responsive styles */
+        body {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .question-container {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .question {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 10px 15px;
+            text-align: left;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            word-break: break-word;
+        }
+        
+        .option:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #eef7ff;
+            border-radius: 4px;
+        }
+        
+        .explanation h2 {
+            font-size: 18px;
+            margin-top: 0;
+        }
+        
+        .back-button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .back-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4a6fa5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        code {
+            font-family: monospace;
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
+            
+            .question {
+                font-size: 16px;
+            }
+            
+            .option {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .question-container {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-1"></div>
+    <div class="container">
+         
+        <h1>Number System Quiz</h1>
+         
+
+        
+        <!-- Question 1 -->
+        <div class="question-container">
+            <p class="question">1️⃣ What is the sum of the first 5 positive even numbers?</p>
+            <div class="options" data-correct="30">
+                <button class="option">20</button>
+                <button class="option">30</button>
+                <button class="option">40</button>
+                <button class="option">50</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p>The first 5 positive even numbers are 2, 4, 6, 8, and 10.</p>
+                <p>Adding them: 2 + 4 + 6 + 8 + 10 = 30.</p>
+                <p><strong>Answer:</strong> 30 ✅</p>
+            </div>
+        </div>
+        
+        <!-- Question 2 -->
+        <div class="question-container">
+            <p class="question">2️⃣ Which of the following numbers is a prime number?</p>
+            <div class="options" data-correct="17">
+                <button class="option">19</button>
+                <button class="option">15</button>
+                <button class="option">18</button>
+                <button class="option">17</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p>A prime number has only two factors: 1 and itself.</p>
+                <p>17 is the only number here that meets this condition.</p>
+                <p><strong>Answer:</strong> 17 ✅</p>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-container">
+            <p class="question">3️⃣ What is the value of 15% of 80?</p>
+            <div class="options" data-correct="12">
+                <button class="option">12</button>
+                <button class="option">10</button>
+                <button class="option">13</button>
+                <button class="option">14</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p>15% of 80 can be written as (15/100) × 80 = 12.</p>
+                <p><strong>Answer:</strong> 12 ✅</p>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-container">
+            <p class="question">4️⃣ If a number is doubled and then 5 is added, the result is 21. What is the number?</p>
+            <div class="options" data-correct="8">
+                <button class="option">11</button>
+                <button class="option">9</button>
+                <button class="option">8</button>
+                <button class="option">12</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p>Let the number be 'x'. 2x + 5 = 21.</p>
+                <p>Solving for x, we get x = 8.</p>
+                <p><strong>Answer:</strong> 8 ✅</p>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-container">
+            <p class="question">5️⃣ What is the smallest 4-digit number that can be formed using 0, 1, 2, and 3 without repetition?</p>
+            <div class="options" data-correct="1023">
+                <button class="option">0123</button>
+                <button class="option">1023</button>
+                <button class="option">1230</button>
+                <button class="option">3210</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p>The smallest possible 4-digit number is 1023 (since 0 cannot be the leading digit).</p>
+                <p><strong>Answer:</strong> 1023 ✅</p>
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question-container">
+            <p class="question">6️⃣ The sum of two numbers is 45, and their difference is 15. What are the two numbers?</p>
+            <div class="options" data-correct="15 and 30">
+                <button class="option">20 and 25</button>
+                <button class="option">30 and 20</button>
+                <button class="option">25 and 20</button>
+                <button class="option">15 and 30</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p>Let the two numbers be x and y.</p>
+                <p>Given: x + y = 45 and x - y = 15.</p>
+                <p>Adding the two equations: 2x = 60, so x = 30.</p>
+                <p>Substituting x = 30 in x + y = 45: 30 + y = 45, so y = 15.</p>
+                <p><strong>Answer:</strong> 15 and 30 ✅</p>
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question-container">
+            <p class="question">7️⃣ If the product of two numbers is 216 and their HCF is 6, what is their LCM?</p>
+            <div class="options" data-correct="36">
+                <button class="option">36</button>
+                <button class="option">37</button>
+                <button class="option">73</button>
+                <button class="option">63</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p>We know that the product of two numbers = HCF * LCM.</p>
+                <p>Given: Product = 216, HCF = 6.</p>
+                <p>So, 216 = 6 * LCM.</p>
+                <p>LCM = 216 / 6 = 36.</p>
+                <p><strong>Answer:</strong> 36 ✅</p>
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question-container">
+            <p class="question">8️⃣ A number when divided by 119 leaves a remainder of 19. What is the remainder when it is divided by 17?</p>
+            <div class="options" data-correct="2">
+                <button class="option">9</button>
+                <button class="option">5</button>
+                <button class="option">2</button>
+                <button class="option">11</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p>Let the number be 'N'.</p>
+                <p>N = 119k + 19, where k is an integer.</p>
+                <p>119 is divisible by 17 (119 = 17 * 7).</p>
+                <p>So, N = (17 * 7k) + 19.</p>
+                <p>19 divided by 17 leaves a remainder of 2.</p>
+                <p>Therefore, N when divided by 17 will leave a remainder of 2.</p>
+                <p><strong>Answer:</strong> 2 ✅</p>
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question-container">
+            <p class="question">9️⃣ Find the number of trailing zeros in 50! (50 factorial).</p>
+            <div class="options" data-correct="12">
+                <button class="option">8</button>
+                <button class="option">10</button>
+                <button class="option">11</button>
+                <button class="option">12</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p>Trailing zeros are formed by pairs of 2 and 5 in the prime factorization.</p>
+                <p>Since there are more 2s than 5s, we count the number of 5s.</p>
+                <p>50/5 = 10.</p>
+                <p>50/25 = 2.</p>
+                <p>Total = 10 + 2 = 12.</p>
+                <p><strong>Answer</strong> 12 ✅</p>
+ 
+    </div>
+</div>
+<div class="back-button-container">
+    <button class="back-button" onclick="goBack()">⬅ Back</button>
+</div>
+    </div>
+    
+    <script src="Apptitude-common-learn-script.js"></script>
+    
+    
+<div id="footer"></div>
+
+<script>
+// Load Header
+fetch('/components/final-header.html')
+    .then(response => response.text())
+    .then(data => document.getElementById('header-1').innerHTML = data);
+
+// Load Footer
+fetch('/components/final-footer.html')
+    .then(response => response.text())
+    .then(data => document.getElementById('footer').innerHTML = data);
+</script>
+</body>
+</html>
