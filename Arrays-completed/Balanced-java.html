@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balanced Parenthesis Problem in Java</title>
+    <style>
+        /* Main Content Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+    
+        main {
+            flex: 1;
+            padding: 30px;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+    
+        .content-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+    
+        .content-header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+    
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    
+        .card h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+    
+        .card p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+    
+        .example {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+    
+        .example h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+    
+        .methods {
+            margin-top: 40px;
+        }
+    
+        .methods h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+    
+        .methods ul {
+            list-style-position: inside;
+            margin-left: 20px;
+        }
+    
+        .methods li {
+            margin-bottom: 30px;
+        }
+    
+        .code {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 15px 0;
+            line-height: 1.5;
+            tab-size: 4;
+        }
+    
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                padding: 15px;
+            }
+            
+            .content-header h1 {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-1"></div>
+
+    <main>
+        <header class="content-header">
+        <h1>Balanced Parenthesis Problem in Java</h1>
+    </header>
+    <section class="container">
+        <div class="card">
+            <h2>Understanding Balanced Parenthesis Problem</h2>
+            <p>The balanced parenthesis problem involves checking whether a given string of brackets is balanced or not.</p>
+            <p>We will explore three different methods to solve this problem in Java.</p>
+        </div>
+        
+        <div class="card">
+            <h2>Method 1: Using Stack</h2>
+            <pre class="code">
+import java.util.Stack;
+
+public class BalancedParenthesis {
+    public static boolean isBalanced(String expr) {
+        Stack<Character> stack = new Stack<>();
+        for (char ch : expr.toCharArray()) {
+            if (ch == '(' || ch == '{' || ch == '[') {
+                stack.push(ch);
+            } else {
+                if (stack.isEmpty()) return false;
+                char last = stack.pop();
+                if ((ch == ')' && last != '(') || 
+                    (ch == '}' && last != '{') || 
+                    (ch == ']' && last != '[')) {
+                    return false;
+                }
+            }
+        }
+        return stack.isEmpty();
+    }
+
+    public static void main(String[] args) {
+        String expr = "{[()]}";
+        System.out.println(isBalanced(expr) ? "Balanced" : "Not Balanced");
+    }
+}
+            </pre>
+        </div>
+        
+        <div class="card">
+            <h2>Method 2: Using Counter</h2>
+            <pre class="code">
+public class BalancedParenthesisCounter {
+    public static boolean isBalanced(String expr) {
+        int count = 0;
+        for (char ch : expr.toCharArray()) {
+            if (ch == '(') count++;
+            else if (ch == ')') count--;
+            if (count < 0) return false;
+        }
+        return count == 0;
+    }
+
+    public static void main(String[] args) {
+        String expr = "(())";
+        System.out.println(isBalanced(expr) ? "Balanced" : "Not Balanced");
+    }
+}
+            </pre>
+        </div>
+        
+        <div class="card">
+            <h2>Method 3: Recursion</h2>
+            <pre class="code">
+public class BalancedParenthesisRecursion {
+    public static boolean checkBalance(String expr, int index, int count) {
+        if (count < 0) return false;
+        if (index == expr.length()) return count == 0;
+        if (expr.charAt(index) == '(') return checkBalance(expr, index + 1, count + 1);
+        if (expr.charAt(index) == ')') return checkBalance(expr, index + 1, count - 1);
+        return checkBalance(expr, index + 1, count);
+    }
+
+    public static void main(String[] args) {
+        String expr = "((()))";
+        System.out.println(checkBalance(expr, 0, 0) ? "Balanced" : "Not Balanced");
+    }
+}
+            </pre>
+        </div>
+    </section>
+</main>
+<style>
+    .back-button {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        background: red;
+        border: none;
+        cursor: pointer;
+    }
+    .back-button:hover {
+        text-decoration: underline;
+    }
+   
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+    }
+    .header {
+background-color: #12a150;
+color: white;
+text-align: center;
+padding: 20px;
+font-size: 24px;
+font-weight: bold;
+position: relative; /* Add this */
+}
+
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    .intro {
+        font-size: 16px;
+        color: #444;
+    }
+    .section-title {
+        font-size: 22px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+    .question {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    .btn {
+        display: inline-block;
+        padding: 8px 15px;
+        border-radius: 8px;
+        font-size: 14px;
+        color: white;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+        text-transform: uppercase;
+        text-decoration: none;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    .btn:hover {
+        transform: scale(1.05);
+    }
+    .c { background: linear-gradient(45deg, #2ecc71, #27ae60); }
+    .cpp { background: linear-gradient(45deg, #f1c40f, #e67e22); }
+    .java { background: linear-gradient(45deg, #e74c3c, #c0392b); }
+    .python { background: linear-gradient(45deg, #3498db, #2980b9); }
+</style>
+
+
+
+<div class="header">
+    <button class="back-button" onclick="goBack()">&lt; Back</button>
+    Top 100 Codes By Learn-for-free
+</div>
+
+<div class="header">Start Preparing Arraysform here👇</div>
+<div class="container">
+    <p class="intro">Below You will find some of the most important codes in languages like C, C++, Java, and Python. These codes are of prime importance for college semester exams and online tests.</p>
+     
+    <div class="section-title">Getting Started</div>
+     
+
+    <p class="question">
+        Find Largest Element in an Array: 
+        <a href="Larr-c.html" class="btn c">C</a>
+        <a href="Larr-c++.html" class="btn cpp">C++</a>
+        <a href="Larr-java.html" class="btn java">Java</a>
+        <a href="Larr-python.html" class="btn python">Python</a>
+    </p>
+    
+    <p class="question">
+        Find Smallest Element in an Array: 
+        <a href="Sarr-c.html" class="btn c">C</a>
+        <a href="Sarr-c++.html" class="btn cpp">C++</a>
+        <a href="Sarr-java.html" class="btn java">Java</a>
+        <a href="Sarr-python.html" class="btn python">Python</a>
+    </p>
+    
+    <p class="question">
+        Find the Smallest and Largest Element in an Array: 
+        <a href="sl-c.html" class="btn c">C</a>
+        <a href="sl-c++.html" class="btn cpp">C++</a>
+        <a href="sl-java.html" class="btn java">Java</a>
+        <a href="sl-python.html" class="btn python">Python</a>
+    </p>
+    
+    <p class="question">
+        Find Second Smallest Element in an Array: 
+        <a href="sse-c.html" class="btn c">C</a>
+        <a href="sse-c++.html" class="btn cpp">C++</a>
+        <a href="sse-java.html" class="btn java">Java</a>
+        <a href="sse-python.html" class="btn python">Python</a>
+    </p>
+    
+    <p class="question">
+        Calculate the Sum of Elements in an Array: 
+        <a href="ra-c.html" class="btn c">C</a>
+        <a href="ra-c++.html" class="btn cpp">C++</a>
+        <a href="ra-java.html" class="btn java">Java</a>
+        <a href="ra-python.html" class="btn python">Python</a>
+    </p>
+    
+    <p class="question">
+        Reverse an Array: 
+        <a href="csea-c.html" class="btn c">C</a>
+        <a href="csea-c++.html" class="btn cpp">C++</a>
+        <a href="csea-java.html" class="btn java">Java</a>
+        <a href="csea-python.html" class="btn python">Python</a>
+     </p>
+    
+    <p class="question">
+        Sort First Half in Ascending Order and Second Half in Descending: 
+        <a href="ad-c.html" class="btn c">C</a>
+        <a href="ad-c++.html" class="btn cpp">C++</a>
+        <a href="ad-java.html" class="btn java">Java</a>
+        <a href="ad-python.html" class="btn python">Python</a>
+    </p>
+    
+    <p class="question">
+        Finding the Frequency of Elements in an Array: 
+        <a href="fe-c.html" class="btn c">C</a>
+        <a href="fe-c++.html" class="btn cpp">C++</a>
+        <a href="fe-java.html" class="btn java">Java</a>
+        <a href="fe-python.html" class="btn python">Python</a>
+    </p>
+    
+    <p class="question">
+        Counting the Number of Even and Odd Elements in an Array: 
+        <a href="evenodd-c.html" class="btn c">C</a>
+        <a href="evenodd-c++.html" class="btn cpp">C++</a>
+        <a href="evenodd-java.html" class="btn java">Java</a>
+        <a href="evenodd-python.html" class="btn python">Python</a>
+    </p>
+    
+    <p class="question">
+        Finding Maximum Product Sub-array in a Given Array: 
+        <a href="Sub-array-c.html" class="btn c">C</a>
+        <a href="Sub-array-c++.html" class="btn cpp">C++</a>
+        <a href="Sub-array-java.html" class="btn java">Java</a>
+        <a href="Sub-array-python.html" class="btn python">Python</a>
+    </p>
+    
+    <p class="question">
+        Finding Arrays are Disjoint or Not: 
+        <a href="Disjoint-c.html" class="btn c">C</a>
+        <a href="Disjoint-c++.html" class="btn cpp">C++</a>
+        <a href="Disjoint-java.html" class="btn java">Java</a>
+        <a href="Disjoint-python.html" class="btn python">Python</a>
+    </p>
+    
+    <p class="question">
+        Finding Equilibrium Index of an Array: 
+        <a href="Equilibrium-c.html" class="btn c">C</a>
+        <a href="Equilibrium-c++.html" class="btn cpp">C++</a>
+        <a href="Equilibrium-java.html" class="btn java">Java</a>
+        <a href="Equilibrium-python.html" class="btn python">Python</a>
+    </p>
+    
+    <p class="question">
+        Rotation of Elements of Array - Left and Right: 
+        <a href="Rotation-c.html" class="btn c">C</a>
+        <a href="Rotation-c++.html" class="btn cpp">C++</a>
+        <a href="Rotation-java.html" class="btn java">Java</a>
+        <a href="Rotation-python.html" class="btn python">Python</a>
+    </p>
+    
+    <p class="question">
+        Balanced Parenthesis Problem: 
+        <a href="Balanced-c.html" class="btn c">C</a>
+        <a href="Balanced-c++.html" class="btn cpp">C++</a>
+        <a href="Balanced-java.html" class="btn java">Java</a>
+        <a href="Balanced-python.html" class="btn python">Python</a>
+    </p>
+    
+    
+</div>
+
+
+<script>
+   function goBack() {
+if (window.history.length > 1) {
+    history.back();
+} else {
+    window.location.href = '/'; // Change '/' to the desired fallback URL
+}
+}
+
+    </script>
+
+
+
+    
+<div id="footer"></div>
+
+<script>
+// Load Header
+fetch('/components/final-header.html')
+    .then(response => response.text())
+    .then(data => document.getElementById('header-1').innerHTML = data);
+
+// Load Footer
+fetch('/components/final-footer.html')
+    .then(response => response.text())
+    .then(data => document.getElementById('footer').innerHTML = data);
+</script>
+
+</body>
+</html>
