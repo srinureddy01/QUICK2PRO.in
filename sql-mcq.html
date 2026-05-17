@@ -1,0 +1,464 @@
+ 
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>SQL Quiz</title>
+     <link rel="stylesheet" href="mcq-common.css">
+     <style>
+        /* Additional responsive styles */
+        body {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .question-container {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .question {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 10px 15px;
+            text-align: left;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            word-break: break-word;
+        }
+        
+        .option:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #eef7ff;
+            border-radius: 4px;
+        }
+        
+        .explanation h2 {
+            font-size: 18px;
+            margin-top: 0;
+        }
+        
+        .back-button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .back-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4a6fa5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        code {
+            font-family: monospace;
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
+            
+            .question {
+                font-size: 16px;
+            }
+            
+            .option {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .question-container {
+                padding: 12px;
+            }
+        }
+    </style>
+
+     <script>
+        function loadComponent(file, elementId) {
+            fetch(file)
+                .then(response => response.text())
+                .then(data => document.getElementById(elementId).innerHTML = data);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            loadComponent("components/final-header.html", "header");
+            loadComponent("components/final-footer.html", "footer");
+        });
+    </script>
+ </head>
+ <body>
+
+     <!-- Header Section -->
+     <div id="header"></div>  <!-- Header will be inserted dynamically -->
+     <div class="container">
+          
+         <h1>SQL Quiz</h1>
+ 
+         <div class="question-container">
+            <p class="question">1. Which SQL statement is used to remove a table from a database?</p>
+            <div class="options" data-correct="a) DROP TABLE">
+                <button class="option">a) DROP TABLE</button>
+                <button class="option">b) REMOVE TABLE</button>
+                <button class="option">c) DELETE TABLE</button>
+                <button class="option">d) TRUNCATE TABLE</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p><code>DROP TABLE</code> is used to completely remove a table and its data from a database. <code>TRUNCATE TABLE</code> removes all rows but keeps the table structure.</p>
+                <p><strong>Answer:</strong> a) DROP TABLE ✅</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <p class="question">2. What is the purpose of the <code>COALESCE()</code> function in SQL?</p>
+            <div class="options" data-correct="c) To return the first non-NULL value in a list.">
+                <button class="option">a) To calculate the average of a set of values.</button>
+                <button class="option">b) To count the number of rows.</button>
+                <button class="option">c) To return the first non-NULL value in a list.</button>
+                <button class="option">d) To concatenate strings.</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p><code>COALESCE()</code> returns the first non-NULL value in a list of arguments, which is useful for handling NULL values.</p>
+                <p><strong>Answer:</strong> c) To return the first non-NULL value in a list. ✅</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <p class="question">3. Which SQL clause is used to specify a search condition for groups or aggregates?</p>
+            <div class="options" data-correct="b) HAVING">
+                <button class="option">a) WHERE</button>
+                <button class="option">b) HAVING</button>
+                <button class="option">c) ORDER BY</button>
+                <button class="option">d) GROUP BY</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p><code>HAVING</code> is used to filter groups based on a specified condition, typically after a <code>GROUP BY</code> clause.</p>
+                <p><strong>Answer:</strong> b) HAVING ✅</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <p class="question">4. What does the <code>EXISTS</code> operator do in SQL?</p>
+            <div class="options" data-correct="d) Tests for the existence of any records in a subquery.">
+                <button class="option">a) Returns the sum of a column.</button>
+                <button class="option">b) Returns the average of a column.</button>
+                <button class="option">c) Sorts the result set.</button>
+                <button class="option">d) Tests for the existence of any records in a subquery.</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p>The <code>EXISTS</code> operator checks whether a subquery returns any rows.</p>
+                <p><strong>Answer:</strong> d) Tests for the existence of any records in a subquery. ✅</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <p class="question">5. Which SQL function is used to convert a value to a specific data type?</p>
+            <div class="options" data-correct="a) CAST()">
+                <button class="option">a) CAST()</button>
+                <button class="option">b) TYPEOF()</button>
+                <button class="option">c) CONVERT()</button>
+                <button class="option">d) DATATYPE()</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p>Both <code>CAST()</code> and <code>CONVERT()</code> are used to convert a value to a specified data type, although they may have slight syntax differences depending on the SQL dialect.</p>
+                <p><strong>Answer:</strong> a) CAST() ✅</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <p class="question">6. What is a <code>VIEW</code> in SQL?</p>
+            <div class="options" data-correct="b) A virtual table based on the result-set of an SQL statement.">
+                <button class="option">a) A physical table.</button>
+                <button class="option">b) A virtual table based on the result-set of an SQL statement.</button>
+                <button class="option">c) An index.</button>
+                <button class="option">d) A stored procedure.</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p>A <code>VIEW</code> is a virtual table that is based on the result-set of an SQL statement. It does not store data itself.</p>
+                <p><strong>Answer:</strong> b) A virtual table based on the result-set of an SQL statement. ✅</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <p class="question">7. Which SQL keyword is used to combine the result sets of two or more <code>SELECT</code> statements, removing duplicate rows?</p>
+            <div class="options" data-correct="d) UNION">
+                <button class="option">a) JOIN</button>
+                <button class="option">b) UNION ALL</button>
+                <button class="option">c) INTERSECT</button>
+                <button class="option">d) UNION</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p><code>UNION</code> combines the result sets of two or more <code>SELECT</code> statements and removes duplicate rows. <code>UNION ALL</code> includes duplicates.</p>
+                <p><strong>Answer:</strong> d) UNION ✅</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <p class="question">8. What is the purpose of a <code>TRANSACTION</code> in SQL?</p>
+            <div class="options" data-correct="c) To ensure that a set of SQL statements are treated as a single unit of work.">
+                <button class="option">a) To create a view.</button>
+                <button class="option">b) To create an index.</button>
+                <button class="option">c) To ensure that a set of SQL statements are treated as a single unit of work.</button>
+                <button class="option">d) To define a stored procedure.</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p>A transaction ensures that a set of SQL statements are treated as a single unit of work, either all succeed or all fail, maintaining data integrity.</p>
+                <p><strong>Answer:</strong> c) To ensure that a set of SQL statements are treated as a single unit of work. ✅</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <p class="question">9. Which SQL function is used to find the largest value in a set of values?</p>
+            <div class="options" data-correct="a) MAX()">
+                <button class="option">a) MAX()</button>
+                <button class="option">b) MIN()</button>
+                <button class="option">c) AVG()</button>
+                <button class="option">d) SUM()</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p><code>MAX()</code> returns the maximum value in a set of values.</p>
+                <p><strong>Answer:</strong> a) MAX() ✅</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <p class="question">10. What is the purpose of a <code>TRIGGER</code> in SQL?</p>
+            <div class="options" data-correct="d) To execute a predefined SQL statement in response to certain events in a database.">
+                <button class="option">a) To create a view.</button>
+                <button class="option">b) To define a stored procedure.</button>
+                <button class="option">c) To create an index.</button>
+                <button class="option">d) To execute a predefined SQL statement in response to certain events in a database.</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p>A <code>TRIGGER</code> is a stored procedure that automatically executes in response to certain events in a database, such as <code>INSERT</code>, <code>UPDATE</code>, or <code>DELETE</code>.</p>
+                <p><strong>Answer:</strong> d) To execute a predefined SQL statement in response to certain events in a database. ✅</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <p class="question">11. Which SQL operator is used for pattern matching with wildcards?</p>
+            <div class="options" data-correct="b) LIKE">
+                <button class="option">a) =</button>
+                <button class="option">b) LIKE</button>
+                <button class="option">c) IN</button>
+                <button class="option">d) BETWEEN</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p><code>LIKE</code> is used for pattern matching with wildcards such as <code>%</code> (any sequence of characters) and <code>_</code> (any single character).</p>
+                <p><strong>Answer:</strong> b) LIKE ✅</p>
+            </div>
+        </div>
+        <div class="question-container">
+            <p class="question">12. What does the <code>INNER JOIN</code> clause return in SQL?</p>
+            <div class="options" data-correct="c) Rows with matching values in both tables.">
+                <button class="option">a) All rows from the left table.</button>
+                <button class="option">b) All rows from the right table.</button>
+                <button class="option">c) Rows with matching values in both tables.</button>
+                <button class="option">d) All rows when there is a match in either left or right table.</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p><code>INNER JOIN</code> returns only the rows that have matching values in both tables.</p>
+                <p><strong>Answer:</strong> c) Rows with matching values in both tables. ✅</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <p class="question">13. Which SQL statement is used to modify the structure of an existing table?</p>
+            <div class="options" data-correct="a) ALTER TABLE">
+                <button class="option">a) ALTER TABLE</button>
+                <button class="option">b) MODIFY TABLE</button>
+                <button class="option">c) UPDATE TABLE</button>
+                <button class="option">d) CHANGE TABLE</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p><code>ALTER TABLE</code> is used to add, modify, or delete columns in an existing table.</p>
+                <p><strong>Answer:</strong> a) ALTER TABLE ✅</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <p class="question">14. What is the purpose of the <code>CHECK</code> constraint in SQL?</p>
+            <div class="options" data-correct="d) To limit the value range that can be placed in a column.">
+                <button class="option">a) To define a primary key.</button>
+                <button class="option">b) To ensure that all values in a column are unique.</button>
+                <button class="option">c) To define a foreign key.</button>
+                <button class="option">d) To limit the value range that can be placed in a column.</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p>The <code>CHECK</code> constraint is used to ensure that all values in a column satisfy specified conditions.</p>
+                <p><strong>Answer:</strong> d) To limit the value range that can be placed in a column. ✅</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <p class="question">15. Which SQL keyword is used to return only unique rows from a query result?</p>
+            <div class="options" data-correct="b) DISTINCT">
+                <button class="option">a) ALL</button>
+                <button class="option">b) DISTINCT</button>
+                <button class="option">c) WHERE</button>
+                <button class="option">d) GROUP BY</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p><code>DISTINCT</code> is used to return only unique rows from a query result.</p>
+                <p><strong>Answer:</strong> b) DISTINCT ✅</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <p class="question">16. What is the purpose of a <code>STORED PROCEDURE</code> in SQL?</p>
+            <div class="options" data-correct="b) To store and execute a precompiled set of SQL statements.">
+                <button class="option">a) To create a view.</button>
+                <button class="option">b) To store and execute a precompiled set of SQL statements.</button>
+                <button class="option">c) To create an index.</button>
+                <button class="option">d) To define a trigger.</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p>A <code>STORED PROCEDURE</code> is a precompiled set of SQL statements stored in the database that can be executed repeatedly.</p>
+                <p><strong>Answer:</strong> b) To store and execute a precompiled set of SQL statements. ✅</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <p class="question">17. Which SQL function is used to calculate the average of a set of values?</p>
+            <div class="options" data-correct="c) AVG()">
+                <button class="option">a) MAX()</button>
+                <button class="option">b) MIN()</button>
+                <button class="option">c) AVG()</button>
+                <button class="option">d) SUM()</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p><code>AVG()</code> is used to calculate the average of a set of values.</p>
+                <p><strong>Answer:</strong> c) AVG() ✅</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <p class="question">18. What does the <code>FULL OUTER JOIN</code> clause return in SQL?</p>
+            <div class="options" data-correct="b) All rows when there is a match in either left or right table.">
+                <button class="option">a) Rows with matching values in both tables.</button>
+                <button class="option">b) All rows when there is a match in either left or right table.</button>
+                <button class="option">c) Rows from the left table only.</button>
+                <button class="option">d) Rows from the right table only.</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p><code>FULL OUTER JOIN</code> returns all rows when there is a match in either the left or right table.</p>
+                <p><strong>Answer:</strong> b) All rows when there is a match in either left or right table. ✅</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <p class="question">19. Which SQL operator is used to test if a value is within a range?</p>
+            <div class="options" data-correct="d) BETWEEN">
+                <button class="option">a) IN</button>
+                <button class="option">b) =</button>
+                <button class="option">c) LIKE</button>
+                <button class="option">d) BETWEEN</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p><code>BETWEEN</code> is used to test if a value is within a specified range.</p>
+                <p><strong>Answer:</strong> d) BETWEEN ✅</p>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <p class="question">20. What is the primary purpose of an <code>INDEX</code> in SQL?</p>
+            <div class="options" data-correct="b) To speed up data retrieval operations.">
+                <button class="option">a) To store data.</button>
+                <button class="option">b) To speed up data retrieval operations.</button>
+                <button class="option">c) To create a view.</button>
+                <button class="option">d) To define a trigger.</button>
+            </div>
+            <div class="explanation hidden">
+                <h2>Step-by-Step Explanation</h2>
+                <p>An <code>INDEX</code> is primarily used to speed up data retrieval operations by allowing the database to quickly locate specific rows.</p>
+                <p><strong>Answer:</strong> b) To speed up data retrieval operations. ✅</p>
+            </div>
+        </div>
+        
+ 
+          
+         
+<div class="back-button-container">
+    <button class="back-button" onclick="goBack()">⬅ Back</button>
+</div>
+     </div>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+         
+ 
+     </div>
+     <script src="mcq-common.js"></script>
+     <div id="footer"></div>  <!-- Footer will be inserted dynamically -->
+ </body>
+ </html>
