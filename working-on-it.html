@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Under Construction</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1e1e2f;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .header, .footer {
+            position: fixed;
+            width: 100%;
+            background: #111;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 1.2rem;
+            z-index: 10;
+        }
+        .header { top: 0; }
+        .footer { bottom: 0; }
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 60vh;
+            position: relative;
+            z-index: 5;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .amazing-button {
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0px 10px 20px rgba(255, 75, 43, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .amazing-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 15px 30px rgba(255, 75, 43, 0.7);
+        }
+        .balloon {
+            position: absolute;
+            font-size: 2rem;
+            animation: floatUp 3s linear infinite;
+        }
+        @keyframes floatUp {
+            from { transform: translateY(100vh); opacity: 1; }
+            to { transform: translateY(-10vh); opacity: 0; }
+        }
+        .celebration {
+            position: absolute;
+            font-size: 2rem;
+            animation: burst 1.5s ease-out forwards;
+        }
+        @keyframes burst {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #ddd;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        
+        .header {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .header a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .header a:hover {
+            background-color: #e9ecef;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html">Quick 2 Pro</a></div>
+    <div class="content">
+        <h1 id="status-message">We are working on it</h1>
+        <button class="amazing-button" onclick="startCelebration()">Beyond Imagination</button>
+    </div>
+    <div class="footer">
+        <a href="Course-list.html">BACK</a>
+    </div>
+    
+    <script>
+        function createCelebrationEmoji() {
+            const emoji = document.createElement('div');
+            emoji.classList.add('celebration');
+            emoji.innerText = '🎉';
+            emoji.style.left = Math.random() * window.innerWidth + 'px';
+            emoji.style.top = Math.random() * window.innerHeight + 'px';
+            document.body.appendChild(emoji);
+            setTimeout(() => emoji.remove(), 1500);
+        }
+        
+        function startCelebration() {
+            document.querySelectorAll('.balloon').forEach(balloon => balloon.remove());
+            document.getElementById('status-message').innerText = "We will update you once all is set. Thank you!";
+            for (let i = 0; i < 50; i++) {
+                setTimeout(createCelebrationEmoji, i * 100);
+            }
+        }
+
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+            balloon.innerText = '🎈';
+            balloon.style.left = Math.random() * window.innerWidth + 'px';
+            document.body.appendChild(balloon);
+            setTimeout(() => balloon.remove(), 3000);
+        }
+
+        window.onload = () => {
+            setInterval(createBalloon, 500);
+        };
+    </script>
+</body>
+</html>
